@@ -1,20 +1,12 @@
-import { Routes, Route, } from "react-router-dom";
-import "./App.css";
-import Login from "./components/Login";
-/* import {AuthProvider} from "" */
-function App() {
-  return (
-    <div className="App" style={{fontFamily: "Avenir"}}>
-      <Routes>
-        {/* <AuthProvider> */}
-          
+import Navbar from "./components/Navbar";
+import Login from "./pages/Login";
 
-        <Route path="/" Component={Login}/>
-         
-        {/* </AuthProvider> */}
-      </Routes>
-    </div>
-  );
+function App() {
+  return <>
+             <Navbar/>
+            <Login/>
+  
+         </>;
 }
 
 export default App;
