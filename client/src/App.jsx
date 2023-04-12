@@ -1,11 +1,12 @@
 import Navbar from "./components/Navbar";
+import ChatRoom from "./pages/ChatRoom";
 import Login from "./pages/Login";
 
 function App() {
   return <>
              <Navbar/>
-            <Login/>
-  
+          {/*   <Login/> */}
+              <ChatRoom/>
          </>;
 }
 
