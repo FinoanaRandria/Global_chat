@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { UserAuth } from "../context/AuthContext";
 import { GoogleAuthProvider } from "firebase/auth"
+import { useNavigate } from "react-router-dom";
 const Login = () => {
  
   const {currentUser, siginWithGoogle} = UserAuth();
 
-  console.log(currentUser);
-
+  //console.log(currentUser);
+    const navigate = useNavigate()
    const handleLogin = async()=>{
        try{
            await siginWithGoogle()
@@ -16,7 +17,16 @@ const Login = () => {
           console.log(error);
        }
 
+       
+
    }
+
+   useEffect(()=>{
+    if(currentUser){
+        navigate("/chat")
+    }
+ 
+},[currentUser])
 
   return (
     <div>
