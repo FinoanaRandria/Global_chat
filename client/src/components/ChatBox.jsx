@@ -1,26 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Message from "./Message";
+import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { db } from "../firebase/firebase";
+
 const ChatBox = () => {
+  const [messages ,setMassages] = useState([])
+  
 
-    const messages = [
+  useEffect(() => {
+    const q = query(collection(db, "messages"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const messages = [];
+      querySnapshot.forEach((doc) => {
+       messages.push({...doc.data(), id: doc.id});
+        
+      });
+       setMassages(messages);
+    });
 
-      {
-
-        id:1,
-        text: 'hello there',
-        name: 'Eiji'
-      },{
-           id:2,
-           text: "whats'up bro",
-           name: 'hosi no ko'
-      }
-    ]
+     return () => unsubscribe
+  }, []);
 
   return (
     <div className="pb-44 pt-20 containerWrap">
-      {messages.map(message => (
-          <Message key={message.id} message={message}/>
-
+      {messages.map((message) => (
+        <Message key={message.id} message={message} />
       ))}
     </div>
   );

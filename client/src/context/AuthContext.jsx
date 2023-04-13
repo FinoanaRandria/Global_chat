@@ -9,7 +9,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({children})=>{
     const [currentUser, setCurrentUser] = useState(null);
-
+    const [loading , setLoading ] = useState(true);
 //authentifiaction google 
 const siginWithGoogle = ()=>{
    const provider  = new GoogleAuthProvider();
@@ -34,7 +34,7 @@ const siginWithGoogle = ()=>{
        const unsubscribe = onAuthStateChanged(auth, (user)=>{
           setCurrentUser(user)
 
-
+            setLoading(false)
           return unsubscribe
        })
  
@@ -44,7 +44,7 @@ const siginWithGoogle = ()=>{
 
     return (
         <AuthContext.Provider value={value}>
-             {children}
+             {!loading && children}
         </AuthContext.Provider>
     )
 
