@@ -16,7 +16,7 @@ const Navbar = () => {
     }
 
   return (
-    <div className='navbar bg-[#7005e7] text-primary-content flex'>
+    <div className='navbar fixed z-10 bg-[#7005e7] text-primary-content flex'>
 
 <div className=" containerWrap justify-between ">
   <a className="btn btn-ghost normal-case text-xl">Echat 2.0</a>
