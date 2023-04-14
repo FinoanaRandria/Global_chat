@@ -1,11 +1,32 @@
 import React, {useState} from 'react'
 import {AiOutlineSend} from 'react-icons/ai'
+import { UserAuth } from '../context/AuthContext'
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import { db } from '../firebase/firebase'
 const SendMesage = () => {
 
    const [value ,setValue] = useState('')
-
-     const handleSendMessage = (e)=>{
+    const {currentUser} = UserAuth()
+     const handleSendMessage = async (e)=>{
        e.preventDefault()   
+       
+         if(value.trim()== ""){
+           alert('entrer un message')
+           return
+         }
+       try{
+            const {uid,displayName,photoURL } = currentUser;
+            await addDoc(collection(db,'messages'),{
+               text:value,
+               name: displayName,
+               avatar : photoURL,
+               createdAt: serverTimestamp(),
+               uid
+            })
+       }catch(error){
+           console.log(error);
+       }
+
       console.log(value);
        setValue('')
      }
