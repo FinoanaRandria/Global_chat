@@ -5,6 +5,8 @@ import { db } from "../firebase/firebase";
 
 const ChatBox = () => {
   const [messages ,setMassages] = useState([])
+
+  console.log("message nosoratana " + messages);
    const ScrollTobottom = ()=>{
 
       messagesEndRef.current.scrollIntoView({behavior: 'smooth'})
